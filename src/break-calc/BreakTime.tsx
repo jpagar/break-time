@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {CopyToast} from "./CopyToast";
+import "../App.css"
 
 interface TimeBreak {
     timeIn: string;

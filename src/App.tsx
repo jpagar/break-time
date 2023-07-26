@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {BreakTime} from "./break-calc/BreakTime";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-base-100">
       <BreakTime/>
     </div>
   );
