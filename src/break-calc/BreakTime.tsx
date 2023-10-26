@@ -50,10 +50,11 @@ export const BreakTime = () => {
         // Convert hours greater than 12 to 12-hour format
         hours = hours > 12 ? hours - 12 : hours;
 
-        const formattedHours = hours < 10 ? String(hours) : String(hours).padStart(2, '0');
+        const formattedHours = hours < 10 ? String(hours).padStart(2, '0') : String(hours);
         const formattedMinutes = String(minutes).padStart(2, '0');
-        return `${formattedHours}:${formattedMinutes}`;
+        return `${formattedHours}:${formattedMinutes}:00`;
     }
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
@@ -74,6 +75,22 @@ export const BreakTime = () => {
             handleClick()
         }
     };
+
+    const copyToClipboard = (text: string) => {
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showCopyToast();
+                })
+                .catch(err => {
+                    console.error("Failed to copy text to clipboard:", err);
+                });
+        } else {
+            console.warn("Clipboard API not supported in this browser.");
+            // Optionally, you can implement a fallback here, or notify the user about the lack of support.
+        }
+    };
+
 
     const showCopyToast = () => {
         setToggleToast(true)
@@ -115,37 +132,37 @@ export const BreakTime = () => {
                             {/* row 1 */}
                             <tr>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => { showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[0].timeIn as string)
+                                    copyToClipboard(breaks?.[0].timeIn as string)
                                 }}>{breaks ? breaks[0].timeIn : null}</td>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[0].timeOut as string)
+                                    copyToClipboard(breaks?.[0].timeOut as string)
                                 }}>{breaks ? breaks[0].timeOut : null}</td>
                             </tr>
                             {/* row 2 */}
                             <tr>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[1].timeIn as string)
+                                    copyToClipboard(breaks?.[1].timeIn as string)
                                 }}>{breaks ? breaks[1].timeIn : null}</td>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[1].timeOut as string)
+                                    copyToClipboard(breaks?.[1].timeOut as string)
                                 }}>{breaks ? breaks[1].timeOut : null}</td>
                             </tr>
                             {/* row 3 */}
                             <tr>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[2].timeIn as string)
+                                    copyToClipboard(breaks?.[2].timeIn as string)
                                 }}>{breaks ? breaks[2].timeIn : null}</td>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[2].timeOut as string)
+                                    copyToClipboard(breaks?.[2].timeOut as string)
                                 }}>{breaks ? breaks[2].timeOut : null}</td>
                             </tr>
                             {/* row 4 */}
                             <tr>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[3].timeIn as string)
+                                    copyToClipboard(breaks?.[3].timeIn as string)
                                 }}>{breaks ? breaks[3].timeIn : null}</td>
                                 <td className="hover:cursor-pointer hover:text-white" onClick={() => {showCopyToast()
-                                    navigator.clipboard.writeText(breaks?.[3].timeOut as string)
+                                    copyToClipboard(breaks?.[3].timeOut as string)
                                 }}>{breaks ? breaks[3].timeOut : null}</td>
                             </tr>
                             </tbody>
